@@ -10,15 +10,63 @@ let customers = [
     {id:9, name:"Ashlie Wozencraft", age:23, address:{city:"Espinosa", street:"78 Pepper Wood Terrace", house:11}, newsLetter: false},
     {id:10, name:"Jonas Tungate", age:83, address:{city:"Padangulaktanding", street:"224 Manley Drive", house:49}, newsLetter: true}
 ]
-function isAddress(address) {    
-    //TODO
+function isAddress(address) {
+    if (
+      typeof address.city === "string" &&
+      address.city !== null &&
+      typeof address.street === "string" &&
+      address.street !== null &&
+      typeof address.house === "number" &&
+      Number.isInteger(address.house) &&
+      address.house !== null
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function isCustomer(name, age, address, newsLetter) {
+    let logic = false
+    customers.forEach(element => {
+        if (element[name] === name && element[age] === age && element[address] === address && element[newsLetter] === newsLetter) logic = true
+    })
+    return logic
 }
 
-function isCustomer(name, age, address, newsLetter) {    
-    //TODO
-}
 function modifyCustomer (customer){
-    //TODO
+    let users=[...customers];
+    if (
+        typeof customer["name"] === "string" &&
+        customer["name"] !== null &&
+        typeof customer["age"] === "number" &&
+        Number.isInteger(customer["age"]) &&
+        isAddress(customer["address"]) &&
+        customer["age"] !== null &&
+        typeof customer["newsLetter"] === "boolean" &&
+        customer["newsLetter"] !== null
+      ) {
+        if (users.length==0) {
+            return false
+        }
+        let index=-1
+        for (let i = 0; i < users.length; i++) {
+            if (users[i]["id"]==customer["id"]) {
+                index=i
+            }
+        }
+        if (index===-1) {
+            return false
+        }
+        users[index]["name"]=customer["name"]
+        users[index]["age"]=customer["age"]
+        users[index]["address"]=customer["address"]
+        users[index]["newsLetter"]=customer["newsLetter"]
+        return users
+      }
+      else{
+        return false
+      }
 }
 
 module.exports = modifyCustomer;

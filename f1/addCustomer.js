@@ -12,14 +12,51 @@ let customers = [
 ]
 
 function isAddress(address) {
-    //TODO
-}
+    if (
+      typeof address.city === "string" &&
+      address.city !== null &&
+      typeof address.street === "string" &&
+      address.street !== null &&
+      typeof address.house === "number" &&
+      Number.isInteger(address.house) &&
+      address.house !== null
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-function isCustomer(name, age, address, newsLetter) {
-    //TODO
+  function isCustomer(name, age, address, newsLetter) {
+    let logic = false
+    customers.forEach(element => {
+        if (element[name] === name && element[age] === age && element[address] === address && element[newsLetter] === newsLetter) logic = true
+    })
+    return logic
 }
 
 function addCustomer(name, age, address, newsLetter) {
-    //TODO
-}
+    if (
+        typeof name === "string" &&
+        name !== null &&
+        typeof age === "number" &&
+        Number.isInteger(age) &&
+        isAddress(address) &&
+        age !== null &&
+        typeof newsLetter === "boolean" &&
+        newsLetter !== null
+      ) {
+        let users = [...customers];
+        users.push({
+          id: customers.length +1,
+          name: name,
+          age: age,
+          address: address,
+          newsLetter: newsLetter,
+        });
+        return users;
+      } else {
+        return false;
+      }
+    }
 module.exports = addCustomer;

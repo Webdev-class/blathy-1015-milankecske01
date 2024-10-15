@@ -12,6 +12,21 @@ let customers = [
 ]
 
 function removeCustomer(id) {
-    //TODO
+    let users=[...customers];
+    if (users.length==0) {
+        return false
+    }
+    let index=-1
+    for (let i = 0; i < users.length; i++) {
+        if (users[i]["id"]==id) {
+            index=i
+        }
+    }
+    if (index===-1) {
+        return false
+    }
+
+    users.splice(index,1)
+    return users
 }
 module.exports = removeCustomer;
